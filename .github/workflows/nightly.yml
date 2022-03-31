@@ -1,0 +1,10 @@
+name: Nightly Action
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Triggering Nightly'
