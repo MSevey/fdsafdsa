@@ -17,6 +17,5 @@ jobs:
     needs: check-diff
     runs-on: ubuntu-latest
     if: env.GIT_DIFF
-    runs-on: ubuntu-latest
     steps:
       - run: echo 'Triggering Nightly'
