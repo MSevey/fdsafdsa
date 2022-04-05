@@ -1,19 +1,8 @@
 name: Nightly Action
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
-  check-diff:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: technote-space/get-diff-action@v6
-
-  on-success:
-    needs: check-diff
-    runs-on: ubuntu-latest
-    if: needs.check-diff.outputs.diff
-    steps:
-      - run: echo ${{ needs.check-diff.outputs.diff }}
+      - run: echo Changes
