@@ -5,9 +5,15 @@ on:
     types: [completed]
 
 jobs:
+  check-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-diff-action@v6
+
   on-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} and env.GIT_DIFF
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
