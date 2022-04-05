@@ -28,6 +28,6 @@ jobs:
   on-success:
     needs: changes
     runs-on: ubuntu-latest
-    if: ${{ needs.changes.outputs.any }}
+    if: needs.changes.outputs.any
     steps:
       - run: echo Changes
