@@ -12,6 +12,7 @@ jobs:
       - uses: technote-space/get-diff-action@v6
 
   on-success:
+    needs: check-diff
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }} and env.GIT_DIFF
     steps:
@@ -29,6 +30,7 @@ jobs:
           body: ${{ steps.tag_version.outputs.changelog }}
  
   on-failure:
+    needs: check-diff
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
