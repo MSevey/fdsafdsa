@@ -14,7 +14,7 @@ jobs:
   on-success:
     needs: check-diff
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} and env.GIT_DIFF
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} && needs.check-diff.outputs.diff
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
