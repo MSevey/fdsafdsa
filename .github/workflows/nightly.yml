@@ -7,7 +7,6 @@ jobs:
     outputs:
       # Check if the changed status of py is true
       updates: steps.changes.outputs.any == 'true'
-      previoustag: steps.previoustag.outputs.tag
     steps:
       - uses: actions/checkout@v2.2.0
         with:
@@ -28,6 +27,6 @@ jobs:
   on-success:
     needs: changes
     runs-on: ubuntu-latest
-    if: needs.changes.outputs.any
+    if: needs.changes.outputs.updates
     steps:
       - run: echo Changes
