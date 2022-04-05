@@ -1,20 +1,21 @@
 name: Bump version
 on:
   workflow_run:
-    workflows: ['Nightly Action']
+    workflows: ["Nightly Action"]
     types: [completed]
 
 jobs:
   check-diff:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - uses: technote-space/get-diff-action@v6
 
-  on-success:
+  release:
     needs: check-diff
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} && needs.check-diff.outputs.diff
+    if: needs.check-diff.outputs.diff
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
@@ -28,11 +29,3 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
- 
-  on-failure:
-    needs: check-diff
-    runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    steps:
-      - run: echo 'The triggering workflow failed, no version'
-
