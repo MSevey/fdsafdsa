@@ -16,6 +16,5 @@ jobs:
   on-success:
     needs: check-diff
     runs-on: ubuntu-latest
-    if: env.GIT_DIFF
     steps:
-      - run: echo 'Triggering Nightly'
+      - run: echo ${{ needs.check-diff.outputs.diff }}
