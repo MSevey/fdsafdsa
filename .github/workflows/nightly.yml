@@ -24,7 +24,7 @@ jobs:
         with:
           base: ${{ steps.previoustag.outputs.tag }}
           filters: |
-            any: **
+            any: "**"
   on-success:
     needs: changes
     runs-on: ubuntu-latest
