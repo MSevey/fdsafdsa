@@ -16,5 +16,6 @@ jobs:
   on-success:
     needs: check-diff
     runs-on: ubuntu-latest
+    if: needs.check-diff.outputs.diff
     steps:
       - run: echo ${{ needs.check-diff.outputs.diff }}
