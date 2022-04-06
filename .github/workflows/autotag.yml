@@ -1,15 +1,16 @@
 name: Bump version
 on:
   workflow_run:
-    workflows: ["Nightly Action"]
+    workflows: ["fdstion"]
+    #workflows: ["Nightly Action"]
     types: [completed]
 
 jobs:
   changes:
     runs-on: ubuntu-latest
     outputs:
-      # Check if the changed status of py is true
       updates: steps.changes.outputs.any == 'true'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2.2.0
         with:
