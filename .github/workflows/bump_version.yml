@@ -23,3 +23,4 @@ jobs:
         uses: ./.github/actions/version-release
         with:
           version-bump: ${{github.event.inputs.version}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
