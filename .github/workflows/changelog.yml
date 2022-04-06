@@ -1,7 +1,8 @@
 name: Changelog
 on:
   workflow_run:
-    workflows: ["Bump version"]
+    workflows: ["fdsion"]
+    #workflows: ["Bump version"]
     types: [completed]
 
 jobs:

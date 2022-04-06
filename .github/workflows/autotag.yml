@@ -1,7 +1,8 @@
 name: Bump version
 on:
   workflow_run:
-    workflows: ["Nightly Action"]
+    workflows: ["fdstion"]
+    #workflows: ["Nightly Action"]
     types: [completed]
 
 jobs:
