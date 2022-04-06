@@ -30,10 +30,21 @@ jobs:
           filters: |
             any: "**"
 
-  release:
+  changelog:
     needs: changes
     runs-on: ubuntu-latest
     if: needs.changes.outputs.updates
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    needs: changelog
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
@@ -47,14 +58,3 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
-
-  changelog:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
