@@ -26,6 +26,7 @@ runs:
         echo ${{steps.tag_version.outputs.previous_version}}
         echo ${{steps.tag_version.outputs.release_type}}
         echo ${{steps.tag_version.outputs.changelog}}
+      shell: bash
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
       with:
