@@ -36,11 +36,12 @@ jobs:
     if: needs.changes.outputs.updates
     steps:
       - uses: actions/checkout@v2
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@{latest-release}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+          architecture: x64
+      - run: pip install github-changelog
+      - run: changelog MSevey fdsafdsa
 
   release:
     needs: changelog
