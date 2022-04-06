@@ -1,6 +1,7 @@
 name: Daily Release
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   build:
