@@ -47,10 +47,8 @@ jobs:
   release:
     needs: changes
     runs-on: ubuntu-latest
-    if: needs.changes.outputs.updates
+    if: ${{needs.changes.outputs.updates}}
     steps:
-      - run: echo needs.changes.outputs.updates
-      - run: echo ${{needs.changes.outputs.updates}}
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         id: tag_version
