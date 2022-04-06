@@ -18,6 +18,14 @@ runs:
       with:
         github_token: ${{ inputs.github-token }}
         default_bump: ${{ inputs.version-bump }}
+    - name: debug
+      run: |
+        echo ${{steps.tag_version.outputs.new_tag}}
+        echo ${{steps.tag_version.outputs.new_version}}
+        echo ${{steps.tag_version.outputs.previous_tag}}
+        echo ${{steps.tag_version.outputs.previous_version}}
+        echo ${{steps.tag_version.outputs.release_type}}
+        echo ${{steps.tag_version.outputs.changelog}}
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
       with:
