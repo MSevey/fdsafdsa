@@ -30,22 +30,10 @@ jobs:
           filters: |
             any: "**"
 
-  changelog:
+  release:
     needs: changes
     runs-on: ubuntu-latest
     if: needs.changes.outputs.updates
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
-          architecture: x64
-      - run: pip install github-changelog
-      - run: changelog MSevey fdsafdsa
-
-  release:
-    needs: changelog
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
